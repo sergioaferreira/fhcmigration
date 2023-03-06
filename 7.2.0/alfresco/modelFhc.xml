@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="fhc:arquivo" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+	<description>Documentos Digitalizados</description>
+	<author>FH</author>
+	<version>2.0</version>
+	<imports>
+		<import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+		<import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+	</imports>
+	<namespaces>
+		<namespace uri="http://future-healthcare.net/model/arquivo/2.0" prefix="fhc" />
+	</namespaces>
+	<constraints />
+	<types>
+        <type name="fhc:document">
+            <title>Ficheiro FH</title>
+            <parent>cm:content</parent>
+            <properties>
+                <property name="fhc:n_processo">
+                    <title>Processo</title>
+                    <type>d:text</type>
+                </property>
+				 <property name="fhc:isDeleted">
+                    <title>Ficheiro Removido</title>
+                    <type>d:text</type>
+					<default>0</default>
+                </property>
+				<property name="fhc:nr_arquivo">
+					<title>Numero Arquivo</title>
+					<type>d:text</type>
+				</property>
+				<property name="fhc:tipo_documento">
+					<title>Tipo de Documento</title>
+					<type>d:text</type>
+				</property>
+				<property name="fhc:sub_tipo_documento">
+					<title>Subtipo de Documento</title>
+					<type>d:text</type>
+				</property>
+            </properties>
+        </type>
+        
+		<type name="fhc:FacturaPrestador">
+			<title>Facturas Prestadores</title>
+			<parent>fhc:document</parent>
+			<properties>
+				<property name="fhc:entidade_facturar">
+					<title>Entidade</title>
+					<type>d:text</type>
+				</property>
+				<property name="fhc:nif_entidade_facturar">
+					<title>NIF Entidade a Facturar</title>
+					<type>d:text</type>
+				</property>
+				<property name="fhc:data_recepcao">
+					<title>Data de Recepção</title>
+					<type>d:date</type>
+				</property>
+				<property name="fhc:nome_prestador">
+					<title>Nome Prestador</title>
+					<type>d:text</type>
+				</property>
+				<property name="fhc:nif_prestador">
+					<title>NIF Prestador</title>
+					<type>d:text</type>
+				</property>
+				<property name="fhc:nr_fatura">
+					<title>Nº da Factura</title>
+					<type>d:text</type>
+				</property>
+				<property name="fhc:data_fatura">
+					<title>Data da Factura</title>
+					<type>d:date</type>
+				</property>
+				<property name="fhc:valor_total">
+					<title>Valor Total</title>
+					<type>d:double</type>
+				</property>
+			</properties>
+		</type>
+
+	</types>
+</model>

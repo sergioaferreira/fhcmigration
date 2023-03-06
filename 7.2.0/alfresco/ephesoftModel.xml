@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Custom Model -->
+<!-- Note: This model is pre-configured to load at startup of the Repository.  So, all custom -->
+<!--       types and aspects added here will automatically be registered -->
+
+<model name="ephesoft:demomodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+    <!-- Optional meta-data about the model -->
+    <description>VLC</description>
+    <author>Tjarda Peelen - VLC</author>
+    <version>0.1</version>
+
+    <imports>
+        <!-- Import Alfresco Dictionary Definitions -->
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+    </imports>
+    <!-- Introduction of new namespaces defined by this model -->
+    <!-- NOTE: The following namespace custom.model should be changed to reflect your own namespace -->
+    <namespaces>      <namespace uri="com.ephesoft.demo" prefix="ephesoft"/>   </namespaces>
+
+    <constraints />
+    <types>
+        <type name="ephesoft:document">
+            <title>ephesoft_scan</title>
+            <parent>cm:content</parent>
+            <properties>
+                <property name="ephesoft:n_processo">
+                    <title>Processo ephesoft</title>
+                    <type>d:text</type>
+                </property>
+				 <property name="ephesoft:isDeleted">
+                    <title>Ficheiro Removido</title>
+                    <type>d:text</type>
+					<default>0</default>
+                </property>
+            </properties>
+        </type>
+        <type name="ephesoft:FacturaPrestador">
+            <title>Facturas Prestadores</title>
+            <parent>cm:content</parent>
+            <properties>
+                <property name="ephesoft:nif_prestador">
+                    <title>NIF</title>
+                    <type>d:text</type>
+                </property>
+                <property name="ephesoft:nr_fatura">
+                    <title>Nº da Factura</title>
+                    <type>d:text</type>
+                </property>
+                <property name="ephesoft:data_fatura">
+                    <title>Data da Factura</title>
+                    <type>d:text</type>
+                </property>
+                <property name="ephesoft:entidade_faturar">
+                    <title>Entidade</title>
+                    <type>d:text</type>
+                </property>
+                <property name="ephesoft:data_recepcao">
+                    <title>Data de Recepção</title>
+                    <type>d:text</type>
+                </property>
+                <property name="ephesoft:nr_arquivo">
+                    <title>Nº Arquivo Contabilidade</title>
+                    <type>d:text</type>
+                </property>
+            </properties>
+        </type>
+		<type name="ephesoft:PreAutorizacoes">
+            <title>Pre Autorizações</title>
+            <parent>ephesoft:document</parent>
+			<properties>
+				<property name="ephesoft:nome">
+                    <title>Nome</title>
+                    <type>d:text</type>
+                </property>
+                <property name="ephesoft:num_cliente">
+                    <title>Número do cliente</title>
+                    <type>d:text</type>
+                </property>
+				<property name="ephesoft:emails">
+                    <title>Emails</title>
+                    <type>d:text</type>
+                </property>
+				 <property name="ephesoft:data_sinistro">
+                    <title>Data do Sinistro</title>
+                    <type>d:text</type>
+                </property>
+			</properties>	
+		</type>
+		<type name="ephesoft:Reembolso">
+			<title>Reembolsos</title>
+            <parent>ephesoft:document</parent>
+            <properties>
+				<property name="ephesoft:reemb_nome">
+                    <title>Nome</title>
+                    <type>d:text</type>
+                </property>
+                <property name="ephesoft:reemb_n_cliente">
+                    <title>Número do cliente</title>
+                    <type>d:text</type>
+                </property>
+                <property name="ephesoft:reemb_nr_fatura">
+                    <title>Nº da Factura</title>
+                    <type>d:text</type>
+                </property>
+                <property name="ephesoft:reemb_data_recepcao">
+                    <title>Data de Recepção</title>
+                    <type>d:text</type>
+                </property>
+                <property name="ephesoft:reemb_nr_arquivo">
+                    <title>Nº Arquivo Contabilidade</title>
+                    <type>d:text</type>
+                </property>
+            </properties>
+		</type>
+		<type name="ephesoft:InfoAdicionalPreAuth">
+			<title>Info Adicional Pre Autorizacoes</title>
+            <parent>ephesoft:document</parent>
+			<properties>
+				<property name="ephesoft:clinical_case">
+					<title>Caso Clínico</title>
+					<type>d:text</type>
+				</property>
+			</properties>
+		</type>
+    </types>
+</model>

@@ -30,9 +30,6 @@ devidamente o share-config-custom.xml
 ??? Nota @Rodrigo: é necessário o caminho de evolução de versões que fizeste
 em *Train*
 
-??? @Rodrigo: Vou criar um projecto no github que pertilho para colocar toda a
-ficheirada (zips, yamls, dockerfiles e scripts)
-
 
 Tarefas a executar:
 * Criar uma pasta organizada com todas as versões intermédias

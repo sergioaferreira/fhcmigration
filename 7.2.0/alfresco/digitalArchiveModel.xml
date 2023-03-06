@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Future Healthcare - Digital Archive -->
+<!-- Alfresco Metadata Model -->
+<model xmlns="http://www.alfresco.org/model/dictionary/1.0" name="da:model">
+   <!-- Optional meta-data about the model -->
+   <description>FHC Digital Archive Model</description>
+   <author></author>
+   <version>1.0</version>
+   <imports>
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+   </imports>
+   <namespaces>
+      <namespace uri="da.model" prefix="da" />
+      <namespace uri="da.policy.model" prefix="policy" />
+      <namespace uri="da.client.model" prefix="client" />
+      <namespace uri="da.document.model" prefix="document" />
+      <namespace uri="da.claim.model" prefix="claim" />
+      <namespace uri="da.practice.model" prefix="practice" />
+      <namespace uri="da.tuw.model" prefix="tuw" />
+      <namespace uri="da.edi.model" prefix="edi"/>
+   </namespaces>
+   <aspects>
+      <!-- Conjunto de metadatados que descrevem uma apolice -->
+      <aspect name="da:policy">
+         <title>Dados Apólice</title>
+         <properties>
+            <property name="policy:company_id">
+               <title>ID Companhia</title>
+               <type>d:int</type>
+            </property>
+            <property name="policy:company_name">
+               <title>Nome Companhia</title>
+               <type>d:text</type>
+            </property>
+            <property name="policy:product_id">
+               <title>Codigo do Produto</title>
+               <type>d:int</type>
+            </property>
+            <property name="policy:policy_id">
+               <title>ID da Apolice (depende da Companhia)</title>
+               <type>d:int</type>
+            </property>
+            <property name="policy:policy_number">
+               <title>Numero da Apolice</title>
+               <type>d:text</type>
+            </property>
+            <property name="policy:holder_fiscal_number">
+               <title>Nif do Titular da Apolice</title>
+               <type>d:text</type>
+            </property>
+            <property name="policy:main_person_fiscal_number">
+               <title>Nif do Responsavel do agregado familiar na Apolice</title>
+               <type>d:text</type>
+            </property>
+         </properties>
+      </aspect>
+      <!-- Descrição de um cliente -->
+      <aspect name="da:client">
+         <title>Dados Cliente</title>
+         <properties>
+            <property name="client:name">
+               <title>Nome do Cliente</title>
+               <type>d:text</type>
+            </property>
+            <property name="client:national_id_card">
+               <title>BI / Cartão do Cidadão</title>
+               <type>d:text</type>
+            </property>
+            <property name="client:fiscal_number">
+               <title>NIF</title>
+               <type>d:text</type>
+            </property>
+            <property name="client:email">
+               <title>E-Mail</title>
+               <type>d:text</type>
+            </property>
+            <property name="client:phone_number">
+               <title>Telefone</title>
+               <type>d:text</type>
+            </property>
+            <property name="client:mobile_number">
+               <title>Telemovel</title>
+               <type>d:text</type>
+            </property>
+            <property name="client:card_number">
+               <title>Numero cartao FHC</title>
+               <type>d:text</type>
+            </property>
+            <property name="client:can_view_document">
+               <title>Clientes podem ver este documento</title>
+               <type>d:boolean</type>.
+               <default>false</default>
+            </property>
+         </properties>
+      </aspect>
+      <!-- Descrição de um documento da Future Healthcare -->
+      <aspect name="da:document">
+         <title>Dados Documento FHC</title>
+         <properties>
+            <property name="document:is_deleted">
+               <title>Indica se o documento esta marcado como apagado</title>
+               <type>d:int</type>
+               <default>0</default>
+            </property>
+            <property name="document:issuance_date">
+               <title>Data emissão do documento nos sistemas da FHC</title>
+               <type>d:date</type>
+            </property>
+            <property name="document:document_number">
+               <title>Numero do Documento</title>
+               <type>d:text</type>
+            </property>
+            <property name="document:document_type">
+               <title>Tipo do Documento</title>
+               <type>d:text</type>
+            </property>
+            <property name="document:insert_user">
+               <title>Utilizador que criou o Documento</title>
+               <type>d:text</type>
+            </property>
+            <property name="document:id">
+               <title>ID do Ficheiro</title>
+               <type>d:text</type>
+            </property>
+            <property name="document:origin">
+               <title>Origem da Insercao do Documento</title>
+               <type>d:text</type>
+            </property>
+            <property name="document:insert_date">
+               <title>Data da Criação do Documento</title>
+               <type>d:date</type>
+            </property>
+            <property name="document:scan_date">
+               <title>Data da Digitalizacao</title>
+               <type>d:date</type>
+            </property>
+            <property name="document:process_type">
+               <title>Tipo de Processo (interno de sistema)</title>
+               <type>d:text</type>
+            </property>
+            <property name="document:process_number">
+               <title>Numero do Processo (interno de sistema)</title>
+               <type>d:text</type>
+            </property>
+            <property name="document:process_metadata">
+               <title>Metadados de Suporte ao Processo</title>
+               <type>d:text</type>
+            </property>
+            <property name="document:general_conditions_contract_target">
+               <title>Documento Condições Particulares para Contratos (Novos e/ou Renovacoes)</title>
+               <type>d:text</type>
+            </property>
+         </properties>
+      </aspect>
+      <!-- Descrição de um Sinistro -->
+      <aspect name="da:claim">
+         <title>Dados Sinistro</title>
+         <properties>
+            <property name="claim:claim_id">
+               <title>Identificador do Sinistro</title>
+               <type>d:text</type>
+            </property>
+            <property name="claim:clinic_case">
+               <title>Caso Clinico</title>
+               <type>d:text</type>
+            </property>
+            <property name="claim:receipt_number">
+               <title>Numero da Factura</title>
+               <type>d:text</type>
+            </property>
+            <property name="claim:billing_date">
+               <title>Data da Factura</title>
+               <type>d:date</type>
+            </property>
+            <property name="claim:mail_reception_date">
+               <title>Data de Recepcao do Documento</title>
+               <type>d:date</type>
+            </property>
+            <property name="claim:physical_archive_number">
+               <title>Numero de Arquivo</title>
+               <type>d:text</type>
+            </property>
+         </properties>
+      </aspect>
+      <!-- Descrição de dados relacionados com Prestador -->
+      <aspect name="da:practice">
+         <title>Dados Prestador</title>
+         <properties>
+            <property name="practice:can_view_document">
+               <title>Prestadores podem ver este documento</title>
+               <type>d:boolean</type>
+            </property>
+            <property name="practice:practice_id">
+               <title>System Practice ID</title>
+               <type>d:int</type>
+            </property>
+            <property name="practice:building_id">
+               <title>System Building ID</title>
+               <type>d:int</type>
+            </property>
+         </properties>
+      </aspect>
+      <!-- Descrição de dados relacionados com questionarios clinicos -->
+      <aspect name="da:tuw">
+         <title>TUW</title>
+         <properties>
+            <property name="tuw:questionnaire_id">
+               <title>Associated Questionnaire ID</title>
+               <type>d:int</type>
+            </property>
+         </properties>
+      </aspect>
+      <!-- Descrição de dados relacionados com questionarios clinicos -->
+      <aspect name="da:edi">
+         <title>EDI</title>
+         <properties>
+            <property name="edi:process_id">
+               <title>EDI Process Id</title>
+               <type>d:int</type>
+            </property>
+            <property name="edi:fiscal_number_payer">
+               <title>Payer Fiscal Number</title>
+               <type>d:text</type>
+            </property>
+            <property name="edi:fiscal_number_payee">
+               <title>Payee Fiscal Number</title>
+               <type>d:text</type>
+            </property>
+            <property name="edi:document_number">
+               <title>Document Number (Invoice Number)</title>
+               <type>d:text</type>
+            </property>
+            <property name="edi:document_date">
+               <title>Document Creation Date</title>
+               <type>d:date</type>
+            </property>
+            <property name="edi:is_attachment">
+               <title>Indica se o documento é um anexo de uma fatur (= 1)a, ou se deve ser considerado uma fatura (is_attachment = 0)</title>
+               <type>d:int</type>
+                <default>0</default>
+            </property>
+         </properties>
+      </aspect>
+   </aspects>
+</model>

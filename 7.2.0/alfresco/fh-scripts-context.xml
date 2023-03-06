@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+<!-- Not compatible
+    <bean id="bonitaLauncher" parent="baseJavaScriptExtension" class="fh.alfresco.BonitaProcessLauncherv3">
+        <property name="extensionName">
+            <value>bonitaProcess</value>
+        </property>
+    </bean>
+    <bean id="bonitaLauncherV3" parent="baseJavaScriptExtension" class="fh.alfresco.BonitaProcessLauncherv3">
+        <property name="extensionName">
+            <value>bonitaProcessV3</value>
+        </property>
+    </bean>
+    <bean id="fhnetLauncherV1" parent="baseJavaScriptExtension" class="fh.alfresco.FHNETProcessLauncher">
+        <property name="extensionName">
+            <value>fhnetProcess</value>
+        </property>
+    </bean>
+-->
+</beans>

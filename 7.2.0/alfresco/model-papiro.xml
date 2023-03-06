@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="papiro:arquivo" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+	<description>Documentos Digitalizados</description>
+	<author>FH</author>
+	<version>3.0</version>
+	<imports>
+		<import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+		<import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+	</imports>
+	<namespaces>
+		<namespace uri="http://future-healthcare.net/model/arquivo/papiro/1.0" prefix="papiro" />
+	</namespaces>
+	
+	<constraints />
+	
+	<types>
+        <type name="papiro:documento">
+            <title>Ficheiro FH</title>
+            <parent>cm:content</parent>
+            
+            <properties>
+            	<!-- informativo, preenchido por PAPIRO -->
+            	<property name="papiro:uid">
+            		<title>Identificador Único</title>
+            		<type>d:text</type>
+            	</property>
+            	<!-- uso interno FH -->
+            	<property name="papiro:origem">
+            		<title>Contexto do Documento</title>
+            		<type>d:text</type>
+            	</property>
+            	
+            	<!-- uso interno FH -->
+				<property name="papiro:is_deleted">
+                    <title>Ficheiro Removido</title>
+                    <type>d:int</type>
+					<default>0</default>
+                </property>
+                
+				<!--
+				Tipos de Documento
+					- Factura
+				-->
+				<property name="papiro:tipo_documento">
+					<title>Tipo de Documento</title>
+					<type>d:text</type>
+				</property>
+				
+				<!--
+				Sub Tipos de Documento
+					[type=papiro:factura_prestador]
+					- Factura
+						- Factura Prestador
+						- Factura Prestador Complexa
+					
+					[type=papiro:factura_reembolso]
+					- Factura
+						- Factura Reembolso
+						- Factura Reembolso Complexo
+						- Factura Reembolso Reentrada
+				-->
+				<property name="papiro:sub_tipo_documento">
+					<title>Subtipo de Documento</title>
+					<type>d:text</type>
+				</property>
+            </properties>
+        </type>
+        
+        
+        <type name="papiro:processo">
+            <title>Ficheiro associado a processo/workflow</title>
+            <parent>papiro:documento</parent>
+            <properties>
+            	<!-- uso interno FH -->
+                <property name="papiro:n_processo">
+                    <title>Processo</title>
+                    <type>d:text</type>
+                </property>
+                
+                <!-- numero arquivo físico: indicado por PAPIRO -->
+				<property name="papiro:nr_arquivo">
+					<title>Numero Arquivo</title>
+					<type>d:text</type>
+				</property>
+				
+				<!-- v3: caso clinico (reembolso) já existente/identificado associado ao documento -->
+				<property name="papiro:caso_clinico">
+					<title>Caso Clínico</title>
+					<type>d:int</type>
+				</property>
+				
+				<!-- v3: preenchimento interno FH -->
+				<property name="papiro:id_bonita">
+					<title>ID Processo Bonita</title>
+					<type>d:text</type>
+				</property>
+
+				
+				<property name="papiro:n_processo_online">
+                    <title>ID Submissão de Processo Online</title>
+                    <type>d:text</type>
+                </property>
+            </properties>
+        </type>
+        
+		<type name="papiro:factura_prestador">
+			<title>Facturas Prestadores</title>
+			<parent>papiro:processo</parent>
+			<properties>
+				<!-- Valores possiveis:
+					- FH
+					- VICTORIA
+				-->
+				<property name="papiro:entidade_facturar">
+					<title>Entidade</title>
+					<type>d:text</type>
+				</property>
+				<property name="papiro:nif_entidade_facturar">
+					<title>NIF Entidade a Facturar</title>
+					<type>d:text</type>
+				</property>
+				<property name="papiro:data_recepcao">
+					<title>Data de Recepção</title>
+					<type>d:date</type>
+				</property>
+				<property name="papiro:nome_prestador">
+					<title>Nome Prestador</title>
+					<type>d:text</type>
+				</property>
+				<property name="papiro:nif_prestador">
+					<title>NIF Prestador</title>
+					<type>d:text</type>
+				</property>
+				<property name="papiro:nr_fatura">
+					<title>Nº da Factura</title>
+					<type>d:text</type>
+				</property>
+				<property name="papiro:data_fatura">
+					<title>Data da Factura</title>
+					<type>d:date</type>
+				</property>
+				<property name="papiro:valor_total">
+					<title>Valor Total</title>
+					<type>d:double</type>
+				</property>
+			</properties>
+		</type>
+		
+		<!-- v3: novo tipo de documento - reembolsos -->
+		<type name="papiro:factura_reembolso">
+			<title>Reembolso Cliente</title>
+			<parent>papiro:processo</parent>
+			<properties>
+				<property name="papiro:reemb_nome_cliente">
+                    <title>Nome Cliente</title>
+                    <type>d:text</type>
+                </property>
+                <property name="papiro:reemb_nr_cartao_cliente">
+                    <title>Número de cartão do Cliente</title>
+                    <type>d:text</type>
+                </property>
+                <!-- opcional, pode ser obtido a partir do número de cartão mas
+                	o ideal é recolher também
+                -->
+                <property name="papiro:reemb_nif_cliente">
+                    <title>NIF do Cliente</title>
+                    <type>d:text</type>
+                </property>
+                
+                <property name="papiro:reemb_nr_fatura">
+                    <title>Nº da Factura</title>
+                    <type>d:text</type>
+                </property>
+                
+                <property name="papiro:reemb_data_recepcao">
+                    <title>Data de Recepção da Fatura (correio)</title>
+                    <type>d:date</type>
+                </property>
+				<property name="papiro:reemb_data_ocorrencia">
+                    <title>Data de Ocorrência do Sinistro</title>
+                    <type>d:date</type>
+                </property>
+                <property name="papiro:reemb_data_fatura">
+                    <title>Data de Emissão da Fatura</title>
+                    <type>d:date</type>
+                </property>
+                
+			</properties>
+		</type>
+	</types>
+</model>
