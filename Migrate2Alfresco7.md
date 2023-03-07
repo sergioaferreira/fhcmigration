@@ -21,58 +21,41 @@ Durante o processo de migração ocorreram as seguintes dificuldades:
 diferente do que hospeda os contentores docker. resolvido ao colocar a
 base de dados no Host Linux que contem o *docker*.
 * Má configuração dos volumes dos contentores, nomeadamente os do SOLR.
-Resolvido adicionando os volumes necessários.
+Resolvido adicionando os volumes necessários e correspondentes permissões.
 * Não configuração dos modelos no Alfresco Share. Resolvido configurando
 devidamente o share-config-custom.xml
 
 ## Migração do Ambiente QA
 
-??? Nota @Rodrigo: é necessário o caminho de evolução de versões que fizeste
-em *Train*
-
-
 Tarefas a executar:
 * Criar uma pasta organizada com todas as versões intermédias
 (zips e docker-compose.yml+dockerfiles e eventuais scripts)
 * Alfresco na nova máquina
-  * Criar nova VM Linux, devidamente actualizada e instalar o *Docker*. A cargo da FHC. Estimativa: 1 dia
-  * Copiar /opt/alfresco??? para a nova VM (com diferenças de QA e PROD).
+  * Criar nova VM Linux, devidamente actualizada e instalar o *Docker* e *Docker-compose*. A cargo da FHC. Estimativa: 1 dia
+  * Copiar ou clonar repositorio (git) com os ficheiros necessários para a migração na nova VM (com diferenças de QA e PROD).
   * Clonar base de dados de QA para uma nova instância de MariaDB.
   * Mudar localização da BD (db.url) em alfresco-global.properties para o clone.
   * Alfresco start & Simple Test
   * Estimativa das tarefas anteriores: 2h
-* Caminho de migração de versões sem containers. Estimativa: 3h :
-  * 5.2.? -> 5.2.? : Instalar o zip da nova versão, actualizando ficheiros de configuração
-que existam no classpath (provavelmente em tomcat/shared/classes) e fazer as verificações
-(arrancar sem excepções, inserções e pesquisas a funcionar)
-  * ?.?.? -> ?.?.? :
-* Verificar o docker-compose.yml Estimativa: 3h:
-  * Todo o conteúdo do Alfresco (BD,Conteúdo e indíces deve existir em volumes).
-  * A cópia do modelo deve fazer parte do dockerfile do repo
-  * A configuração do share-config-custom.xml deve ser efectuada no dockerfile do repo
 * Migração de versões com containers (Estimativa: 5h):
-  * 5.2.? -> 6.0.? : alf_data e indices têm de estar no volume certo dos containers.
-*docker compose up*, ver logs sem excepções e testar funcionamento básico.
-  * 6.0.? -> 6.1.? :
-  * 6.1.? -> 6.2.? :
-  * 6.2.? -> 7.0.? :
-  * 7.0.? -> 7.1.? :
-  * 7.1.? -> 7.2.? :
+  * 5.2.f -> 6.0.7 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.0.7 -> 6.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.1.0 -> 6.1.2-ga : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.1.2-ga -> 6.2.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.2.0 -> 7.0.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 7.0.0 -> 7.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 7.1.0 -> 7.2.0 : Garantir que todos os volumes estejam com as permissões corretas e a funcionar.
 * Instalação do patch que permite os TMDQ(s). Estimativa: 30min
-* Migrar de SOLR4 para SOLR6.x. Estimativa: ???
-* Reindexar. Estimativa: 1h
+* Migrar de SOLR4 para SOLR6.x. Estimativa: 30mim
+* Reindexar. Estimativa: 19h (Migração do zero)
 * Verificação Final. Estimativa: 1d
 
-**Nota muito importante: Não saltar versões !!!**
-
 ## Migração de Produção
-
- ??? Dúvida @Rodrigo: Os dockerfiles da pasta do compose neste momento já reflectem a instalação do modelo e dos share-config-custom.xml???
 
 Tarefas a executar:
 * Alfresco na nova máquina:
   * Criar nova VM Linux, devidamente actualizada e instalar o *Docker*. A cargo da FHC.
-  * Copiar /opt/alfresco??? para a nova VM (com diferenças de QA e PROD). Estimativa: 2min
+  * Copiar ou clonar repositorio (git) com os ficheiros necessários para a migração na nova VM (com diferenças de (com diferenças de QA e PROD). Estimativa: 2min
   * Clonar base de dados de *PROD* para uma nova instância de MariaDB. Estimativa: 30min
 IMPORTANTE: fazê-lo com um mysqldump, parando o alfresco para garantir a
 coerência
@@ -86,15 +69,16 @@ coerência
   * A cópia do modelo deve fazer parte do dockerfile do repo
   * A configuração do share-config-custom.xml deve ser efectuada no dockerfile do repo
 * Migração de versões com containers. Estimativa : 8h :
-  * 5.2.? -> 6.0.? :
-  * 6.0.? -> 6.1.? :
-  * 6.1.? -> 6.2.? :
-  * 6.2.? -> 7.0.? :
-  * 7.0.? -> 7.1.? :
-  * 7.1.? -> 7.2.? :
+  * 5.2.f -> 6.0.7 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.0.7 -> 6.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.1.0 -> 6.1.2-ga : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.1.2-ga -> 6.2.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.2.0 -> 7.0.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 7.0.0 -> 7.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 7.1.0 -> 7.2.0 : Garantir que todos os volumes estejam com as permissões corretas e a funcionar.  
 * Instalação do patch que permite os TMDQ(s). Estimativa: 5h
 * Arrancar com container com SOLR6.x (no compose). Estimativa: 2h
-* Reindexar: Estimativa: ??? @Rodrigo. Quanto tempo demorou a indexar no Train/AWS ???
+* Reindexar: Estimativa: 17h
 * Verificação Final preliminar: Estimativa: 2 dias
 * Migração final (inserir documentos criados entre primeira migração e a janela de paragem final):
   * Parar Alfresco 5.2 em PROD
@@ -107,11 +91,29 @@ da janela de paragem serão agora indexados): Estimativa: 3h
 
 ### Volumes
 
-??? Listar aqui os volumes que vão existir em produção ???
+* alfresco:
+     - /var/lib/alfresco/alf_data:/usr/local/tomcat/alf_data
+     - ./logs/alfresco:/usr/local/tomcat/logs
+
+* share:  
+     - ./logs/share:/usr/local/tomcat/logs
+
+* solr6:
+    - ./logs/solr6:/opt/alfresco-search-services/logs
+    - ./solr6/data:/opt/alfresco-search-services/data
+    - ./solr6/solrhome:/opt/alfresco-search-services/solrhome
+
+* activemq:
+    - ./activemq:/opt/activemq/data
 
 ### Containers
 
-??? Listar aqui os containers que vão existir e uma breve explicação da sua função ???
+* Alfresco -> Repositório de documentos
+* Activemq -> Servidor de messaging
+* Transform-core-aio -> Conversor de tipos de documentos
+* Share -> Interface web para o alfresco
+* Solr6 -> Motor de indexação
+* Proxy -> Web Server\         
 
 ## Verificações e Testes
 
