@@ -35,6 +35,7 @@ Tarefas a executar:
   * Copiar ou clonar repositorio (git) com os ficheiros necessários para a migração na nova VM (com diferenças de QA e PROD).
   * Clonar base de dados de QA para uma nova instância de MariaDB.
   * Mudar localização da BD (db.url) em alfresco-global.properties para o clone.
+  * Copiar alf_data de QA antigo para a nova VM (estimativa: depende da dimensão dos dados)
   * Alfresco start & Simple Test
   * Estimativa das tarefas anteriores: 2h
 * Migração de versões com containers (Estimativa: 5h):
@@ -59,7 +60,7 @@ Tarefas a executar:
   * Clonar base de dados de *PROD* para uma nova instância de MariaDB. Estimativa: 30min
 IMPORTANTE: fazê-lo com um mysqldump, parando o alfresco para garantir a
 coerência
-  * Fazer rsync dos conteúdos para nova NAS/volume: Estimativa: ???
+  * Fazer rsync dos conteúdos para nova NAS/volume: Estimativa: ??? Existem backups. Queremos ou não copiar o alf_data ???
   * Mudar localização da BD (db.url) em alfresco-global.properties para o clone. Estimativa: 15min
   * Alfresco start & Test: Estimativa: 2h
 * Caminho de migração de versões sem containers. Estimativa: 2h :
@@ -75,9 +76,9 @@ coerência
   * 6.1.2-ga -> 6.2.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 6.2.0 -> 7.0.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 7.0.0 -> 7.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
-  * 7.1.0 -> 7.2.0 : Garantir que todos os volumes estejam com as permissões corretas e a funcionar.  
+  * 7.1.0 -> 7.2.0 : Garantir que todos os volumes estejam com as permissões corretas e a funcionar.
 * Instalação do patch que permite os TMDQ(s). Estimativa: 5h
-* Arrancar com container com SOLR6.x (no compose). Estimativa: 2h
+* Arrancar com container com SOLR6.x (com docker compose). Estimativa: 2h
 * Reindexar: Estimativa: 17h
 * Verificação Final preliminar: Estimativa: 2 dias
 * Migração final (inserir documentos criados entre primeira migração e a janela de paragem final):
@@ -91,11 +92,13 @@ da janela de paragem serão agora indexados): Estimativa: 3h
 
 ### Volumes
 
+Em produção, os volumes a partilhar com os containers serão os que se seguem, definido por container
+
 * alfresco:
      - /var/lib/alfresco/alf_data:/usr/local/tomcat/alf_data
      - ./logs/alfresco:/usr/local/tomcat/logs
 
-* share:  
+* share:
      - ./logs/share:/usr/local/tomcat/logs
 
 * solr6:
@@ -113,7 +116,7 @@ da janela de paragem serão agora indexados): Estimativa: 3h
 * Transform-core-aio -> Conversor de tipos de documentos
 * Share -> Interface web para o alfresco
 * Solr6 -> Motor de indexação
-* Proxy -> Web Server\         
+* Proxy -> Reverse proxy para que  não ocorram acessos directos aos serviços nos containers
 
 ## Verificações e Testes
 
