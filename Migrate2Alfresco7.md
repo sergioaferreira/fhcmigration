@@ -39,10 +39,9 @@ Tarefas a executar:
   * Alfresco start & Simple Test
   * Estimativa das tarefas anteriores: 2h
 * Migração de versões com containers (Estimativa: 5h):
-  * 5.2.f -> 6.0.7 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
-  * 6.0.7 -> 6.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
-  * 6.1.0 -> 6.1.2-ga : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
-  * 6.1.2-ga -> 6.2.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 5.2.f -> 6.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.1.0 -> 6.1.2 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.1.2 -> 6.2.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 6.2.0 -> 7.0.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 7.0.0 -> 7.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 7.1.0 -> 7.2.0 : Garantir que todos os volumes estejam com as permissões corretas e a funcionar.
@@ -63,17 +62,10 @@ coerência
   * Fazer rsync dos conteúdos para nova NAS/volume: Estimativa: ??? Existem backups. Queremos ou não copiar o alf_data ???
   * Mudar localização da BD (db.url) em alfresco-global.properties para o clone. Estimativa: 15min
   * Alfresco start & Test: Estimativa: 2h
-* Caminho de migração de versões sem containers. Estimativa: 2h :
-  * 5.2.? -> 5.2.? : Instalar o war da nova versão e fazer as verificações
-* Verificar o docker-compose.yml.  :
-  * Todo o conteúdo do Alfresco (BD,Conteúdo e indíces deve existir em volumes).
-  * A cópia do modelo deve fazer parte do dockerfile do repo
-  * A configuração do share-config-custom.xml deve ser efectuada no dockerfile do repo
 * Migração de versões com containers. Estimativa : 8h :
-  * 5.2.f -> 6.0.7 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
-  * 6.0.7 -> 6.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
-  * 6.1.0 -> 6.1.2-ga : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
-  * 6.1.2-ga -> 6.2.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 5.2.f -> 6.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.1.0 -> 6.1.2 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+  * 6.1.2 -> 6.2.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 6.2.0 -> 7.0.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 7.0.0 -> 7.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 7.1.0 -> 7.2.0 : Garantir que todos os volumes estejam com as permissões corretas e a funcionar.
