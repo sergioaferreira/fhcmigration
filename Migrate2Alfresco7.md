@@ -62,23 +62,30 @@ coerência
   * Fazer rsync dos conteúdos para nova NAS/volume: Estimativa: ??? Existem backups. Queremos ou não copiar o alf_data ???
   * Mudar localização da BD (db.url) em alfresco-global.properties para o clone. Estimativa: 15min
   * Alfresco start & Test: Estimativa: 2h
-* Migração de versões com containers. Estimativa : 8h :
+* Migração de versões com containers. Estimativa : 4h :
   * 5.2.f -> 6.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 6.1.0 -> 6.1.2 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 6.1.2 -> 6.2.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 6.2.0 -> 7.0.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 7.0.0 -> 7.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
   * 7.1.0 -> 7.2.0 : Garantir que todos os volumes estejam com as permissões corretas e a funcionar.
-* Instalação do patch que permite os TMDQ(s). Estimativa: 5h
-* Arrancar com container com SOLR6.x (com docker compose). Estimativa: 2h
-* Reindexar: Estimativa: 17h
+* Reindexar: Estimativa: 20h
 * Verificação Final preliminar: Estimativa: 2 dias
+
 * Migração final (inserir documentos criados entre primeira migração e a janela de paragem final):
+* _Janela de paragem estimada: 10 h completamente parado ; completamente funcional após 15h_
   * Parar Alfresco 5.2 em PROD
-  * rsync de documentos -> É necessário decidir se fazemos ou não sincronização do alf_data
-se decidirmos não fazer, era interessante não deixar lixo dos testes. ??? Talvez se possa limpar por ano/mes/dia dentro do alf_data???
-  * Clonar base de dados: Estimativa: 30min
-  * Executar o Alfresco (os conteúdos inseridos entre a primeira migração e o inicio
+  * rsync de documentos  com remoção de documentos a mais na cópia (em paralelo com a BD)
+  * Clonar base de dados: Estimativa: 4h (2h dump; 2 horas restore)
+  * Migração de versões com containers. Estimativa : 4h :
+    * 5.2.f -> 6.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+    * 6.1.0 -> 6.1.2 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+    * 6.1.2 -> 6.2.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+    * 6.2.0 -> 7.0.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+    * 7.0.0 -> 7.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
+    * 7.1.0 -> 7.2.0 : Garantir que todos os volumes estejam com as permissões corretas e a funcionar.
+  * Instalação do patch que permite os TMDQ(s). Estimativa: 2h
+  * Reindexação do diferencial (os conteúdos inseridos entre a primeira migração e o inicio
 da janela de paragem serão agora indexados): Estimativa: 3h
   * Verificação final + Pesquisas a documentos inseridos entre primeira e última cópia da BD - Estimativa: 2h
 
