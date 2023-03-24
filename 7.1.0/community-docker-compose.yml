@@ -10,8 +10,7 @@ version: "2"
 
 services:
     alfresco:
-            #image: alfresco/alfresco-content-repository-community:7.1.0.1
-        build: .
+        build: alfresco
         mem_limit: 1500m
         environment:
             JAVA_TOOL_OPTIONS: "
@@ -25,10 +24,11 @@ services:
                 -Dmetadata-keystore.metadata.algorithm=DESede
                 "
             JAVA_OPTS: "
+                -Ddir.root=/usr/local/tomcat/alf_data
                 -Ddb.driver=com.mysql.jdbc.Driver
-                -Ddb.username=alfresco_pt
-                -Ddb.password=yJ5dKFtX42KKFqBBoLPaPeFNLMbRCc
-                -Ddb.url=jdbc:mysql://mysql.internal.train.future-healthcare.pt:3306/alfresco_pt_20221016-2305
+                -Ddb.username=alfresco_qa_pt_20230313
+                -Ddb.password=20230313
+                -Ddb.url=jdbc:mysql://192.168.42.216:3306/alfresco_qa_pt_20230313
                 -Dsolr.host=solr6
                 -Dsolr.port=8983
                 -Dsolr.http.connection.timeout=1000
@@ -47,7 +47,7 @@ services:
                 -XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=80
                 "
         volumes:
-            - /var/lib/alfresco/alf_data:/usr/local/tomcat/alf_data
+            - /opt/alfresco/alf_data:/usr/local/tomcat/alf_data
 
 
     transform-core-aio:

@@ -24,10 +24,11 @@ services:
         -Dmetadata-keystore.metadata.algorithm=DESede
         "
       JAVA_OPTS: "
+        -Ddir.root=/usr/local/tomcat/alf_data
         -Ddb.driver=org.mariadb.jdbc.Driver
-        -Ddb.username=alfresco_pt
-        -Ddb.password=yJ5dKFtX42KKFqBBoLPaPeFNLMbRCc
-        -Ddb.url='jdbc:mysql://172.27.100.10:3306/alfresco_pt_20221016-2305?useUnicode=yes&characterEncoding=UTF-8'
+        -Ddb.username=alfresco_qa_pt_20230313
+        -Ddb.password=20230313
+        -Ddb.url=jdbc:mysql://192.168.42.216:3306/alfresco_qa_pt_20230313
         -Dsolr.host=solr6
         -Dsolr.port=8983
         -Dsolr.http.connection.timeout=1000
@@ -47,10 +48,13 @@ services:
         -Dsample.site.disable=true
         -Dsystem.acl.maxPermissionChecks=10000
         -XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=80
+        -Dsystem.metadata-query-indexes.ignored=false
+        -Dsystem.metadata-query-indexes-more.ignored=false
         "
+
     volumes:
-       - /var/lib/alfresco/alf_data:/usr/local/tomcat/alf_data
-       - ./logs/alfresco:/usr/local/tomcat/logs
+       - /opt/alfresco/alf_data:/usr/local/tomcat/alf_data
+       - ./logs/alfresco:/usr/local/tomcat/logs2
 
 
   transform-core-aio:

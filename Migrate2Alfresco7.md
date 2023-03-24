@@ -76,7 +76,7 @@ coerência
 * _Janela de paragem estimada: 10 h completamente parado ; completamente funcional após 15h_
   * Parar Alfresco 5.2 em PROD
   * rsync de documentos  com remoção de documentos a mais na cópia (em paralelo com a BD)
-  * Clonar base de dados: Estimativa: 4h (2h dump; 2 horas restore)
+  * Clonar base de dados: Estimativa: 4h (2h dump; 5 horas restore)
   * Migração de versões com containers. Estimativa : 4h :
     * 5.2.f -> 6.1.0 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
     * 6.1.0 -> 6.1.2 : alf_data têm de estar no volume certo dos containers.*docker compose up*, ver logs sem excepções e testar funcionamento básico.
@@ -91,7 +91,8 @@ da janela de paragem serão agora indexados): Estimativa: 3h
 
 ### Volumes
 
-Em produção, os volumes a partilhar com os containers serão os que se seguem, definido por container
+Em produção, os volumes a partilhar com os containers serão os que se seguem, definido por container.
+Se for necessário verificar e/ou aplicar quaisquer permissões, users e/ou grupos, basta criar a directoria "errada" no container e aplicar as alterações nela ex.: - ./activemq:/opt/activemq/data2
 
 * alfresco:
      - /var/lib/alfresco/alf_data:/usr/local/tomcat/alf_data

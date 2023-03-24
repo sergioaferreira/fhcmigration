@@ -9,7 +9,7 @@
             <list>
                 <value>alfresco/extension/ephesoftModel.xml</value>
                 <value>alfresco/extension/modelFhc.xml</value>
-                <value>alfresco/extension/model-papiro.xml</value>
+		<!--                <value>alfresco/extension/model-papiro.xml</value> -->
             </list>
         </property>
     </bean>
